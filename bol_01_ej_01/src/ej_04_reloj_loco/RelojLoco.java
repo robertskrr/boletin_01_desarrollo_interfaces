@@ -4,6 +4,8 @@
  */
 package ej_04_reloj_loco;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +21,7 @@ public class RelojLoco extends javax.swing.JFrame {
      */
     public RelojLoco() {
         initComponents();
+        jLabelHora.setText(horaActual());
     }
 
     /**
@@ -36,6 +39,7 @@ public class RelojLoco extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabelHora.setText(org.openide.util.NbBundle.getMessage(RelojLoco.class, "RelojLoco.jLabelHora.text")); // NOI18N
+        jLabelHora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButtonUnix.setText(org.openide.util.NbBundle.getMessage(RelojLoco.class, "RelojLoco.jButtonUnix.text")); // NOI18N
         jButtonUnix.addActionListener(new java.awt.event.ActionListener() {
@@ -50,17 +54,19 @@ public class RelojLoco extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(134, 134, 134)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonUnix, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButtonUnix)
                 .addContainerGap(151, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(171, 171, 171))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(94, 94, 94)
+                .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(jButtonUnix)
                 .addContainerGap(124, Short.MAX_VALUE))
         );
@@ -70,7 +76,7 @@ public class RelojLoco extends javax.swing.JFrame {
 
     private void jButtonUnixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUnixActionPerformed
         long timeStampSegundos = System.currentTimeMillis() / 1000;
-        JOptionPane.showMessageDialog(this, "El tiempo UNIX actual es: " + timeStampSegundos + " segundos", "UNIX", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "😵 El tiempo UNIX actual es: " + timeStampSegundos + " segundos 😵", "UNIX", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonUnixActionPerformed
 
     /**
@@ -102,4 +108,17 @@ public class RelojLoco extends javax.swing.JFrame {
     private javax.swing.JButton jButtonUnix;
     private javax.swing.JLabel jLabelHora;
     // End of variables declaration//GEN-END:variables
+    private String horaActual(){
+        LocalTime ahora = LocalTime.now();
+        
+        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        
+       
+        
+        String horaString = ahora.format(formatoHora);
+        
+        return horaString;
+    }
+
 }
+
