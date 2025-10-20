@@ -113,8 +113,6 @@ public class RelojLoco extends javax.swing.JFrame {
         
         DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm:ss");
         
-       
-        
         String horaString = ahora.format(formatoHora);
         
         return horaString;
