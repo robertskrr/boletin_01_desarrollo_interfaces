@@ -1,0 +1,21 @@
+# Archivos de compilación de Java
+*.class
+*.jar
+*.war
+*.ear
+/target/ # Directorio de compilación de Maven/Gradle
+
+# Archivos de IDE (Asegúrate de ignorar el de tu IDE)
+.idea/             # IntelliJ IDEA
+*.iml              # Módulos de IntelliJ
+.classpath         # Eclipse
+.project           # Eclipse
+.settings/         # Eclipse
+/bin/              # Directorios de compilación de Eclipse
+
+# Archivos del sistema operativo
+.DS_Store          # macOS
+Thumbs.db          # Windows
+
+# Archivos de logs
+*.log
