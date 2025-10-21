@@ -36,7 +36,7 @@ public class CumpleaniosFelizDatePicker extends javax.swing.JFrame {
 
         jLabelFechaNac = new javax.swing.JLabel();
         jButtonCalcular = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooserNac = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,20 +58,20 @@ public class CumpleaniosFelizDatePicker extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addComponent(jLabelFechaNac)
-                        .addGap(18, 18, 18)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooserNac, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(153, 153, 153)
                         .addComponent(jButtonCalcular)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(97, 97, 97)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelFechaNac)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooserNac, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jButtonCalcular)
                 .addContainerGap(119, Short.MAX_VALUE))
@@ -81,11 +81,11 @@ public class CumpleaniosFelizDatePicker extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularActionPerformed
-        //Date dateNac = (Date) jSpinnerFechaNac.getValue();
+        Date dateNac = jDateChooserNac.getDate();
 
         // Convertimos Date a LocalDate
-        LocalDate fechaNac = LocalDate.now();
-        
+        LocalDate fechaNac = dateNac.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
         LocalDate hoy = LocalDate.now();
 
         // Cálculos para siguiente cumple
@@ -105,7 +105,7 @@ public class CumpleaniosFelizDatePicker extends javax.swing.JFrame {
         // Calcula los días para el prox cumpleaños
         long diasParaCumple = ChronoUnit.DAYS.between(hoy, proxCumple);
 
-        JOptionPane.showMessageDialog(this, "Tienes " + edad + " años y quedan " + diasParaCumple 
+        JOptionPane.showMessageDialog(this, "Tienes " + edad + " años y quedan " + diasParaCumple
                 + " días para tu siguiente cumple", "CUMPLEAÑOS", JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_jButtonCalcularActionPerformed
@@ -137,7 +137,7 @@ public class CumpleaniosFelizDatePicker extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCalcular;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooserNac;
     private javax.swing.JLabel jLabelFechaNac;
     // End of variables declaration//GEN-END:variables
 }
