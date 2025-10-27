@@ -32,8 +32,8 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
      */
     public RankingPuntajesPopUp() {
         initComponents();
-        configTabla();
-        //addTableHeaderClickListener();
+        iniciarComponentesTabla();
+        addTableHeaderClickListener();
     }
 
     /**
@@ -193,32 +193,47 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
         Jugador jugadorAleatorio = new Jugador(nombreAleatorio, puntuacionAleatoria, nivelAleatorio);
         LogicaRanking.addJugador(jugadorAleatorio);
         // Actualiza la tabla una vez añadido el nuevo jugador
-        configTabla();
+        cargarDatosAlModelo();
+
     }
 
-    /**
-     * Configura la tabla con los valores estimados de ordenación y columnas
-     */
-    private void configTabla() {
+    private void iniciarComponentesTabla() {
+        // 1. INICIALIZAMOS DTM
         dtm = new DefaultTableModel();
-        // Array de títulos
         String[] titulos = new String[]{"Jugador", "Puntuación", "Nivel"};
-        // Asignamos los titulos
         dtm.setColumnIdentifiers(titulos);
+        jTableJugadores.setModel(dtm); // Asignamos el modelo al JTable
 
-        // Asignamos a cada columna los datos de la lista de jugadores
-        LogicaRanking.getListaJugadores().forEach(j -> dtm.addRow(new Object[]{j.getNombre(), j.getPuntuacion(), j.getNivel()}));
-        jTableJugadores.setModel(dtm);
-
-        // --ORDENAR TABLA--
+        // 2. INICIALIZAMOS EL SORTER
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTableJugadores.getModel());
         jTableJugadores.setRowSorter(sorter);
-        // Crear una lista de claves de ordenación (columna y dirección)
+
+        // Configurar orden inicial (Puntuación Descendente)
         List<RowSorter.SortKey> sortKeys = new ArrayList<>();
         sortKeys.add(new RowSorter.SortKey(1, SortOrder.DESCENDING));
         sorter.setSortKeys(sortKeys);
 
-        sorter.sort();
+        // 3. Cargamos los datos iniciales
+        cargarDatosAlModelo();
+    }
+
+    /**
+     * Carga todos los datos del LogicaRanking al modelo DTM existente (para
+     * actualización). LLAMADA CLAVE después de cada adición de jugador.
+     */
+    private void cargarDatosAlModelo() {
+        // 1. Borrar todas las filas del modelo existente (dtm)
+        dtm.setRowCount(0);
+
+        // 2. Volver a llenar el modelo con los datos actualizados
+        LogicaRanking.getListaJugadores().forEach(j -> dtm.addRow(new Object[]{j.getNombre(), j.getPuntuacion(), j.getNivel()}));
+
+        // 3. Forzar la reordenación
+        RowSorter<? extends TableModel> sorter = jTableJugadores.getRowSorter();
+        if (sorter != null) {
+            // Usamos el cast al tipo concreto para acceder al método sort()
+            ((TableRowSorter<?>) sorter).sort();
+        }
     }
 
     /**
@@ -294,7 +309,7 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
         // AÑADIMOS EL JUGADOR
         Jugador jugador = new Jugador(nombre, puntuacion, nivel);
         LogicaRanking.addJugador(jugador);
-        configTabla();
+        cargarDatosAlModelo();
     }
 
     /**
@@ -325,11 +340,10 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
             return;
         }
 
-        String mensaje = "Jugador con más nivel --> " + jugadorMaxNivel.getNombre() + " con el nivel: " + jugadorMaxNivel.getNivel();
+        String mensaje = "**JUGADOR CON MÁS NIVEL**\n " + "*NOMBRE: " + jugadorMaxNivel.getNombre() + "\n *NIVEL: " + jugadorMaxNivel.getNivel();
         JOptionPane.showMessageDialog(this, mensaje, "MÁX NIVEL", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    /*
     private void addTableHeaderClickListener() {
 
         JTableHeader encabezado = jTableJugadores.getTableHeader();
@@ -339,8 +353,6 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
             public void mousePressed(MouseEvent evt) {
 
                 int columnaVisual = encabezado.columnAtPoint(evt.getPoint());
-
-                // CONVERTIR AL ÍNDICE DEL MODELO 
                 int columnaModelo = jTableJugadores.convertColumnIndexToModel(columnaVisual);
 
                 // Verificamos si la columna pulsada es "Nivel" (índice 2)
@@ -350,6 +362,5 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
                 }
             }
         });
-        
-    }*/
+    }
 }
