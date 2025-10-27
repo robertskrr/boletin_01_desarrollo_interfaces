@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ej_06_ranking.gui;
+package ej_07_ranking.gui;
 
-import ej_06_ranking.dto.Jugador;
-import ej_06_ranking.logica.LogicaRanking;
+import ej_07_ranking.dto.Jugador;
+import ej_07_ranking.logica.LogicaRanking;
 import java.awt.Image;
 import java.util.*;
 import javax.swing.ImageIcon;
@@ -20,14 +20,14 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Robert
  */
-public class RankingPuntajesPopUp extends javax.swing.JFrame {
+public class RankingPuntajesConDialog extends javax.swing.JFrame {
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RankingPuntajesPopUp.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RankingPuntajesConDialog.class.getName());
 
     /**
      * Creates new form RankingPuntajes
      */
-    public RankingPuntajesPopUp() {
+    public RankingPuntajesConDialog() {
         initComponents();
         configTabla();
     }
@@ -51,11 +51,11 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabelImgCopa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ej_06_ranking/imgs/copa.png"))); // NOI18N
-        jLabelImgCopa.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesPopUp.class, "RankingPuntajesPopUp.jLabelImgCopa.text")); // NOI18N
+        jLabelImgCopa.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesConDialog.class, "RankingPuntajesConDialog.jLabelImgCopa.text")); // NOI18N
         jLabelImgCopa.setMinimumSize(new java.awt.Dimension(15, 20));
 
         jLabelTitulo.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabelTitulo.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesPopUp.class, "RankingPuntajesPopUp.jLabelTitulo.text")); // NOI18N
+        jLabelTitulo.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesConDialog.class, "RankingPuntajesConDialog.jLabelTitulo.text")); // NOI18N
 
         jTableJugadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -69,7 +69,7 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
 
         jButtonAleatorio.setBackground(new java.awt.Color(102, 255, 102));
         jButtonAleatorio.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonAleatorio.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesPopUp.class, "RankingPuntajesPopUp.jButtonAleatorio.text")); // NOI18N
+        jButtonAleatorio.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesConDialog.class, "RankingPuntajesConDialog.jButtonAleatorio.text")); // NOI18N
         jButtonAleatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAleatorioActionPerformed(evt);
@@ -78,7 +78,7 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
 
         jButtonManual.setBackground(new java.awt.Color(255, 204, 51));
         jButtonManual.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonManual.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesPopUp.class, "RankingPuntajesPopUp.jButtonManual.text")); // NOI18N
+        jButtonManual.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesConDialog.class, "RankingPuntajesConDialog.jButtonManual.text")); // NOI18N
         jButtonManual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonManualActionPerformed(evt);
@@ -155,7 +155,7 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new RankingPuntajesPopUp().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new RankingPuntajesConDialog().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -220,76 +220,8 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
      * Añade al jugador manualmente
      */
     private void addManual() {
-        String nombre = null;
-        String puntuacionString = null;
-        String nivelString = null;
-        int puntuacion = -1;
-        int nivel = -1;
-
-        // -- SOLICITA NOMBRE --
-        do {
-            nombre = JOptionPane.showInputDialog(this, "Introduzca el nombre del jugador", "JUGADOR", JOptionPane.QUESTION_MESSAGE);
-            if (nombre == null) {
-                JOptionPane.showMessageDialog(this, "Has cancelado la gestión", "Aviso", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            if (nombre.length() == 0) {
-                JOptionPane.showMessageDialog(this, "INTRODUCE UN NOMBRE POR FAVOR", "ERROR", JOptionPane.WARNING_MESSAGE);
-            }
-        } while (nombre.length() == 0);
-        // -- SOLICITA PUNTUACIÓN --
-        do {
-            puntuacionString = JOptionPane.showInputDialog(this, "Introduzca la puntuación", "PUNTUACIÓN", JOptionPane.QUESTION_MESSAGE);
-            if (puntuacionString == null) {
-                JOptionPane.showMessageDialog(this, "Has cancelado la gestión", "Aviso", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            puntuacionString = puntuacionString.trim(); // Por si han puesto espacios
-            puntuacion = -1;
-            try {
-                if (puntuacionString.length() > 0) {
-                    puntuacion = Integer.parseInt(puntuacionString); // Lo convierte a int
-
-                    if (puntuacion < 0) {
-                        JOptionPane.showMessageDialog(this, "INTRODUCE UNA PUNTUACIÓN POSITIVA POR FAVOR", "ERROR", JOptionPane.WARNING_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "INTRODUCE UNA PUNTUACIÓN POR FAVOR", "ERROR", JOptionPane.WARNING_MESSAGE);
-                }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "VALOR DE PUNTUACIÓN NO NUMÉRICO VÁLIDO", "ERROR", JOptionPane.WARNING_MESSAGE);
-                puntuacion = -1; // Forzar la repetición
-            }
-        } while (puntuacion < 0);
-        // -- SOLICITA NIVEL --
-        do {
-            nivelString = JOptionPane.showInputDialog(this, "Introduzca el nivel", "NIVEL", JOptionPane.QUESTION_MESSAGE);
-            if (nivelString == null) {
-                JOptionPane.showMessageDialog(this, "Has cancelado la gestión", "Aviso", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            nivelString = nivelString.trim();
-            nivel = -1;
-             try {
-                if (nivelString.length() > 0) {
-                    nivel = Integer.parseInt(nivelString); // Lo convierte a int
-
-                    if (nivel < 0) {
-                        JOptionPane.showMessageDialog(this, "INTRODUCE UN NIVEL POSITIVO POR FAVOR", "ERROR", JOptionPane.WARNING_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "INTRODUCE UN NIVEL POR FAVOR", "ERROR", JOptionPane.WARNING_MESSAGE);
-                }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "VALOR DE NIVEL NO NUMÉRICO VÁLIDO", "ERROR", JOptionPane.WARNING_MESSAGE);
-                nivel = -1; // Forzar la repetición
-            }
-        } while (nivel < 0);
-
-        // AÑADIMOS EL JUGADOR
-        Jugador jugador = new Jugador(nombre, puntuacion, nivel);
-        LogicaRanking.addJugador(jugador);
+        JDialogJugadores dialogJugadores = new JDialogJugadores(this, true);
+        dialogJugadores.setVisible(true);
         configTabla();
-
     }
 }
