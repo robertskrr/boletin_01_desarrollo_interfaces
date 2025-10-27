@@ -6,13 +6,14 @@ package ej_07_ranking.gui;
 
 import ej_07_ranking.dto.Jugador;
 import ej_07_ranking.logica.LogicaRanking;
-import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.*;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -24,12 +25,15 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RankingPuntajesPopUp.class.getName());
 
+    private DefaultTableModel dtm;
+
     /**
      * Creates new form RankingPuntajes
      */
     public RankingPuntajesPopUp() {
         initComponents();
         configTabla();
+        //addTableHeaderClickListener();
     }
 
     /**
@@ -196,7 +200,7 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
      * Configura la tabla con los valores estimados de ordenación y columnas
      */
     private void configTabla() {
-        DefaultTableModel dtm = new DefaultTableModel();
+        dtm = new DefaultTableModel();
         // Array de títulos
         String[] titulos = new String[]{"Jugador", "Puntuación", "Nivel"};
         // Asignamos los titulos
@@ -213,6 +217,7 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
         List<RowSorter.SortKey> sortKeys = new ArrayList<>();
         sortKeys.add(new RowSorter.SortKey(1, SortOrder.DESCENDING));
         sorter.setSortKeys(sortKeys);
+
         sorter.sort();
     }
 
@@ -270,7 +275,7 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
             }
             nivelString = nivelString.trim();
             nivel = -1;
-             try {
+            try {
                 if (nivelString.length() > 0) {
                     nivel = Integer.parseInt(nivelString); // Lo convierte a int
 
@@ -291,4 +296,60 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
         LogicaRanking.addJugador(jugador);
         configTabla();
     }
+
+    /**
+     * Busca el jugador con más nivel
+     *
+     * @return
+     */
+    private Jugador buscarJugadorMaxNivel() {
+        List<Jugador> jugadores = LogicaRanking.getListaJugadores();
+
+        if (jugadores.isEmpty()) {
+            return null;
+        }
+
+        return jugadores.stream()
+                .max(Comparator.comparing(Jugador::getNivel))
+                .get();
+    }
+
+    /**
+     * Muestra al jugador con más nivel
+     */
+    private void mostrarJugadorConMasNivel() {
+        Jugador jugadorMaxNivel = buscarJugadorMaxNivel();
+
+        if (jugadorMaxNivel == null) {
+            JOptionPane.showMessageDialog(this, "No hay jugadores registrados", "ERROR", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String mensaje = "Jugador con más nivel --> " + jugadorMaxNivel.getNombre() + " con el nivel: " + jugadorMaxNivel.getNivel();
+        JOptionPane.showMessageDialog(this, mensaje, "MÁX NIVEL", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /*
+    private void addTableHeaderClickListener() {
+
+        JTableHeader encabezado = jTableJugadores.getTableHeader();
+
+        encabezado.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
+
+                int columnaVisual = encabezado.columnAtPoint(evt.getPoint());
+
+                // CONVERTIR AL ÍNDICE DEL MODELO 
+                int columnaModelo = jTableJugadores.convertColumnIndexToModel(columnaVisual);
+
+                // Verificamos si la columna pulsada es "Nivel" (índice 2)
+                if (columnaModelo == 2) {
+                    mostrarJugadorConMasNivel();
+                    evt.consume();
+                }
+            }
+        });
+        
+    }*/
 }
