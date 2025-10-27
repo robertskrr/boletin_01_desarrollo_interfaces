@@ -50,12 +50,12 @@ public class RankingPuntajesConDialog extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabelImgCopa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ej_06_ranking/imgs/copa.png"))); // NOI18N
-        jLabelImgCopa.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesConDialog.class, "RankingPuntajesConDialog.jLabelImgCopa.text")); // NOI18N
+        jLabelImgCopa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ej_07_ranking/imgs/copa.png"))); // NOI18N
+        jLabelImgCopa.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesConDialog.class, "RankingPuntajesConDialog.jLabelImgCopa.text_1")); // NOI18N
         jLabelImgCopa.setMinimumSize(new java.awt.Dimension(15, 20));
 
         jLabelTitulo.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabelTitulo.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesConDialog.class, "RankingPuntajesConDialog.jLabelTitulo.text")); // NOI18N
+        jLabelTitulo.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesConDialog.class, "RankingPuntajesConDialog.jLabelTitulo.text_1")); // NOI18N
 
         jTableJugadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -69,7 +69,7 @@ public class RankingPuntajesConDialog extends javax.swing.JFrame {
 
         jButtonAleatorio.setBackground(new java.awt.Color(102, 255, 102));
         jButtonAleatorio.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonAleatorio.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesConDialog.class, "RankingPuntajesConDialog.jButtonAleatorio.text")); // NOI18N
+        jButtonAleatorio.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesConDialog.class, "RankingPuntajesConDialog.jButtonAleatorio.text_1")); // NOI18N
         jButtonAleatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAleatorioActionPerformed(evt);
@@ -78,7 +78,7 @@ public class RankingPuntajesConDialog extends javax.swing.JFrame {
 
         jButtonManual.setBackground(new java.awt.Color(255, 204, 51));
         jButtonManual.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonManual.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesConDialog.class, "RankingPuntajesConDialog.jButtonManual.text")); // NOI18N
+        jButtonManual.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesConDialog.class, "RankingPuntajesConDialog.jButtonManual.text_1")); // NOI18N
         jButtonManual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonManualActionPerformed(evt);
@@ -104,7 +104,7 @@ public class RankingPuntajesConDialog extends javax.swing.JFrame {
                         .addComponent(jLabelImgCopa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelTitulo)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
