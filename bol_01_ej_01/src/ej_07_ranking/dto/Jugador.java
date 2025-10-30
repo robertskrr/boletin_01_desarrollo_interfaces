@@ -9,14 +9,17 @@ package ej_07_ranking.dto;
  * @author Robert
  */
 public class Jugador {
+
     private String nombre;
     private int puntuacion;
     private int nivel;
+    private String prioridad;
 
-    public Jugador(String nombre, int puntuacion, int nivel) {
+    public Jugador(String nombre, int puntuacion, int nivel, String prioridad) {
         this.nombre = nombre;
         this.puntuacion = puntuacion;
         this.nivel = nivel;
+        this.prioridad = prioridad;
     }
 
     public String getNombre() {
@@ -42,6 +45,16 @@ public class Jugador {
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
-    
-    
+
+    public String getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(String prioridad) {
+        this.prioridad = prioridad;
+    }
+
+    public String mostrarInfo(){
+        return "- Nombre: " + this.getNombre() + " - Nivel: " + this.getNivel() + " - Puntuación: " + this.getPuntuacion() + " - Prioridad: " + this.getPrioridad().toUpperCase();
+    }
 }

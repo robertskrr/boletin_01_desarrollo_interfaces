@@ -9,6 +9,7 @@ import ej_07_ranking.logica.LogicaRanking;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.*;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
@@ -51,6 +52,7 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
         jTableJugadores = new javax.swing.JTable();
         jButtonAleatorio = new javax.swing.JButton();
         jButtonManual = new javax.swing.JButton();
+        jButtonFiltrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +91,15 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
             }
         });
 
+        jButtonFiltrar.setBackground(new java.awt.Color(255, 153, 51));
+        jButtonFiltrar.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonFiltrar.setText(org.openide.util.NbBundle.getMessage(RankingPuntajesPopUp.class, "RankingPuntajesPopUp.jButtonFiltrar.text")); // NOI18N
+        jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFiltrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,18 +107,20 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jButtonAleatorio)
-                        .addGap(51, 51, 51)
-                        .addComponent(jButtonManual))
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabelImgCopa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelTitulo))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabelImgCopa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelTitulo)))
+                        .addGap(32, 32, 32)
+                        .addComponent(jButtonAleatorio)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonManual)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonFiltrar)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -120,9 +133,10 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonAleatorio, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonManual, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jButtonAleatorio)
+                    .addComponent(jButtonManual)
+                    .addComponent(jButtonFiltrar))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -136,6 +150,10 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
     private void jButtonManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonManualActionPerformed
         addManual();
     }//GEN-LAST:event_jButtonManualActionPerformed
+
+    private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
+        filtrarJugadores();
+    }//GEN-LAST:event_jButtonFiltrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,6 +182,7 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAleatorio;
+    private javax.swing.JButton jButtonFiltrar;
     private javax.swing.JButton jButtonManual;
     private javax.swing.JLabel jLabelImgCopa;
     private javax.swing.JLabel jLabelTitulo;
@@ -178,10 +197,13 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
         Random random = new Random();
         // --NOMBRE ALEATORIO--
         ArrayList<String> nombres = new ArrayList<>(Arrays.asList("Ana", "Elena", "Manolo", "Paco", "Manuel", "Palomo", "Ismail", "Silvia", "Carlos", "Benito"));
-
+        ArrayList<String> prioridades = new ArrayList<>(Arrays.asList("Baja", "Media", "Alta"));
         // Selecciona un indice aleatorio teniendo en cuenta el tamaño del array
         int indiceRandomNombre = random.nextInt(nombres.size());
+        int indiceRandomPrioridad = random.nextInt(prioridades.size());
+
         String nombreAleatorio = nombres.get(indiceRandomNombre);
+        String prioridadAleatoria = prioridades.get(indiceRandomPrioridad);
 
         // --PUNTUACIÓN ALEATORIA--
         int puntuacionAleatoria = random.nextInt(100000);
@@ -190,7 +212,7 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
         int nivelAleatorio = random.nextInt(500);
 
         // Crea al jugador y lo añade a la tabla
-        Jugador jugadorAleatorio = new Jugador(nombreAleatorio, puntuacionAleatoria, nivelAleatorio);
+        Jugador jugadorAleatorio = new Jugador(nombreAleatorio, puntuacionAleatoria, nivelAleatorio, prioridadAleatoria);
         LogicaRanking.addJugador(jugadorAleatorio);
         // Actualiza la tabla una vez añadido el nuevo jugador
         cargarDatosAlModelo();
@@ -200,7 +222,7 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
     private void iniciarComponentesTabla() {
         // 1. INICIALIZAMOS DTM
         dtm = new DefaultTableModel();
-        String[] titulos = new String[]{"Jugador", "Puntuación", "Nivel"};
+        String[] titulos = new String[]{"Jugador", "Puntuación", "Nivel", "Prioridad"};
         dtm.setColumnIdentifiers(titulos);
         jTableJugadores.setModel(dtm); // Asignamos el modelo al JTable
 
@@ -226,7 +248,7 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
         dtm.setRowCount(0);
 
         // 2. Volver a llenar el modelo con los datos actualizados
-        LogicaRanking.getListaJugadores().forEach(j -> dtm.addRow(new Object[]{j.getNombre(), j.getPuntuacion(), j.getNivel()}));
+        LogicaRanking.getListaJugadores().forEach(j -> dtm.addRow(new Object[]{j.getNombre(), j.getPuntuacion(), j.getNivel(), j.getPrioridad()}));
 
         // 3. Forzar la reordenación
         RowSorter<? extends TableModel> sorter = jTableJugadores.getRowSorter();
@@ -243,6 +265,7 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
         String nombre = null;
         String puntuacionString = null;
         String nivelString = null;
+        String prioridad = null;
         int puntuacion = -1;
         int nivel = -1;
 
@@ -305,9 +328,20 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
                 nivel = -1; // Forzar la repetición
             }
         } while (nivel < 0);
+        // AÑADE LA PRIORIDAD
+        do {
+            prioridad = JOptionPane.showInputDialog(this, "Introduzca la prioridad del jugador (Baja, Media o Alta)", "PRIORIDAD", JOptionPane.QUESTION_MESSAGE);
+            if (prioridad == null) {
+                JOptionPane.showMessageDialog(this, "Has cancelado la gestión", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (prioridad.length() == 0) {
+                JOptionPane.showMessageDialog(this, "INTRODUCE UNA PRIORIDAD POR FAVOR", "ERROR", JOptionPane.WARNING_MESSAGE);
+            }
+        } while (prioridad.length() == 0);
 
         // AÑADIMOS EL JUGADOR
-        Jugador jugador = new Jugador(nombre, puntuacion, nivel);
+        Jugador jugador = new Jugador(nombre, puntuacion, nivel, prioridad);
         LogicaRanking.addJugador(jugador);
         cargarDatosAlModelo();
     }
@@ -362,5 +396,27 @@ public class RankingPuntajesPopUp extends javax.swing.JFrame {
                 }
             }
         });
+    }
+
+    /**
+     * Filtra a los jugadores por prioridad
+     */
+    private void filtrarJugadores() {
+        // Filtramos los jugadores
+        List<Jugador> jugadoresFiltrados
+                = LogicaRanking.getListaJugadores().stream()
+                        .filter(j -> j.getPrioridad().equalsIgnoreCase("Alta"))
+                        .collect(Collectors.toList());
+        // Creamos el mensaje de los jugadores con stream
+        String infoJugadores
+                = jugadoresFiltrados.stream()
+                        .map(Jugador::mostrarInfo)
+                        .collect(Collectors.joining("\n"));
+
+        if (infoJugadores.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se encontraron jugadores con prioridad 'Alta'", "Jugadores filtrados", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, infoJugadores, "Jugadores filtrados", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 }

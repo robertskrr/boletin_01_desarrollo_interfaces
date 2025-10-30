@@ -48,11 +48,11 @@ public class JDialogJugadores extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText(org.openide.util.NbBundle.getMessage(JDialogJugadores.class, "JDialogJugadores.jLabel1.text")); // NOI18N
+        jLabel1.setText(org.openide.util.NbBundle.getMessage(JDialogJugadores.class, "JDialogJugadores.jLabel1.text_1")); // NOI18N
 
-        jLabel2.setText(org.openide.util.NbBundle.getMessage(JDialogJugadores.class, "JDialogJugadores.jLabel2.text")); // NOI18N
+        jLabel2.setText(org.openide.util.NbBundle.getMessage(JDialogJugadores.class, "JDialogJugadores.jLabel2.text_1")); // NOI18N
 
-        jLabel3.setText(org.openide.util.NbBundle.getMessage(JDialogJugadores.class, "JDialogJugadores.jLabel3.text")); // NOI18N
+        jLabel3.setText(org.openide.util.NbBundle.getMessage(JDialogJugadores.class, "JDialogJugadores.jLabel3.text_1")); // NOI18N
 
         jTextFieldPuntuacion.setName("Puntuación"); // NOI18N
         jTextFieldPuntuacion.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +94,7 @@ public class JDialogJugadores extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldPuntuacion, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
+                        .addComponent(jTextFieldPuntuacion, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(14, 14, 14)
