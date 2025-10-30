@@ -126,7 +126,7 @@ public class RankingPuntajesConDialog extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAleatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAleatorioActionPerformed
-        addAleatorio();
+        //addAleatorio();
     }//GEN-LAST:event_jButtonAleatorioActionPerformed
 
     private void jButtonManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonManualActionPerformed
@@ -169,7 +169,7 @@ public class RankingPuntajesConDialog extends javax.swing.JFrame {
 
     /**
      * Añade un jugador aleatorio
-     */
+
     private void addAleatorio() {
         Random random = new Random();
         // --NOMBRE ALEATORIO--
@@ -191,6 +191,8 @@ public class RankingPuntajesConDialog extends javax.swing.JFrame {
         // Actualiza la tabla una vez añadido el nuevo jugador
         configTabla();
     }
+    * /
+    
 
     /**
      * Configura la tabla con los valores estimados de ordenación y columnas

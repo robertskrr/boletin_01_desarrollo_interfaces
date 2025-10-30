@@ -70,7 +70,7 @@ public class JDialogJugadores extends javax.swing.JDialog {
 
         jButtonAdd.setBackground(new java.awt.Color(51, 255, 51));
         jButtonAdd.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonAdd.setText(org.openide.util.NbBundle.getMessage(JDialogJugadores.class, "JDialogJugadores.jButtonAdd.text")); // NOI18N
+        jButtonAdd.setText(org.openide.util.NbBundle.getMessage(JDialogJugadores.class, "JDialogJugadores.jButtonAdd.text_1")); // NOI18N
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddActionPerformed(evt);
@@ -167,6 +167,7 @@ public class JDialogJugadores extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldJugadorActionPerformed
 
+    /*
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         Jugador jugador = new Jugador(jTextFieldJugador.getText(),
                 Integer.parseInt(jTextFieldPuntuacion.getText()),
@@ -175,7 +176,7 @@ public class JDialogJugadores extends javax.swing.JDialog {
         LogicaRanking.addJugador(jugador);
         dispose();
     }//GEN-LAST:event_jButtonAddActionPerformed
-
+*/
     private void jTextFieldNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNivelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNivelActionPerformed
