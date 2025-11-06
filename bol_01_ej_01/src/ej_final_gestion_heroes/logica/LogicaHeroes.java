@@ -15,7 +15,7 @@ public class LogicaHeroes {
 
     private static List<Heroe> listaHeroes = new ArrayList<>();
 
-    public boolean existeHeroe(Heroe heroe) {
+    public static boolean existeHeroe(Heroe heroe) {
         if (listaHeroes.contains(heroe)) {
             return true;
         } else {

@@ -4,6 +4,7 @@
  */
 package ej_final_gestion_heroes.gui;
 
+import ej_final_gestion_heroes.dto.Heroe;
 import ej_final_gestion_heroes.logica.LogicaHeroes;
 import java.awt.Image;
 import java.text.SimpleDateFormat;
@@ -12,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +28,7 @@ public class GestorHeroes extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GestorHeroes.class.getName());
     private DefaultTableModel dtm;
+    private final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     /**
      * Creates new form GestorHeroes
@@ -99,6 +102,11 @@ public class GestorHeroes extends javax.swing.JFrame {
 
         jButtonDeleteHeroe.setBackground(new java.awt.Color(153, 0, 0));
         jButtonDeleteHeroe.setText(org.openide.util.NbBundle.getMessage(GestorHeroes.class, "GestorHeroes.jButtonDeleteHeroe.text")); // NOI18N
+        jButtonDeleteHeroe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteHeroeActionPerformed(evt);
+            }
+        });
         jPanelBotones.add(jButtonDeleteHeroe);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -131,8 +139,12 @@ public class GestorHeroes extends javax.swing.JFrame {
     private void jButtonAddHeroeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddHeroeActionPerformed
         FormularioAltaHeroes dialogHeroes = new FormularioAltaHeroes(this, true);
         dialogHeroes.setVisible(true);
-        //cargarDatosTabla();
+        cargarDatosTabla();
     }//GEN-LAST:event_jButtonAddHeroeActionPerformed
+
+    private void jButtonDeleteHeroeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteHeroeActionPerformed
+        eliminarHeroe();
+    }//GEN-LAST:event_jButtonDeleteHeroeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,9 +186,7 @@ public class GestorHeroes extends javax.swing.JFrame {
      */
     private void mostrarFechayUnix() {
         // FECHA ACTUAL
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date d = new Date();
-        System.out.println(sdf.format(d));
 
         String fechaActual = sdf.format(d);
         jLabelFecha.setText(jLabelFecha.getText() + fechaActual);
@@ -227,14 +237,55 @@ public class GestorHeroes extends javax.swing.JFrame {
         // 1. Borrar todas las filas del modelo existente (dtm)
         dtm.setRowCount(0);
 
-        // 2. Volver a llenar el modelo con los datos actualizados
-        LogicaHeroes.getListaHeroes().forEach(h -> dtm.addRow(new Object[]{h.getNombre(), h.getPoder(), h.getNivel(), h.getFechaAlta()}));
+        // 2. Volver a llenar el modelo con los datos actualizados, y con la fecha formateada
+        LogicaHeroes.getListaHeroes().forEach(h -> dtm.addRow(new Object[]{h.getNombre(), h.getPoder(), h.getNivel(), sdf.format(h.getFechaAlta())}));
 
         // 3. Forzar la reordenación
         RowSorter<? extends TableModel> sorter = jTableHeroes.getRowSorter();
         if (sorter != null) {
             // Usamos el cast al tipo concreto para acceder al método sort()
             ((TableRowSorter<?>) sorter).sort();
+        }
+    }
+
+    /**
+     * Elimina al héroe que requiera
+     */
+    private void eliminarHeroe() {
+        // Si no hay ningún heróe registrado aún
+        if (LogicaHeroes.getListaHeroes().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay héroes registrados aún", "No héroes", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Pide el nombre del héroe
+        String heroeBorrar = JOptionPane.showInputDialog(this, "Introduce el héroe que quieres borrar", "Eliminar héroe", JOptionPane.QUESTION_MESSAGE);
+        // Si ha cancelado la operación sale del panel
+        if (heroeBorrar == null) {
+            JOptionPane.showMessageDialog(this, "Operación cancelada", "Cancelado", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        } else if (heroeBorrar.trim().isEmpty()) { // Si no ha introducido ningún nombre
+            JOptionPane.showMessageDialog(this, "No has introducido ningún nombre", "NOMBRE HÉROE", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Busca al héroe en la lista
+        Heroe heroeBorrado = LogicaHeroes.getListaHeroes().stream()
+                .filter(h -> h.getNombre().equalsIgnoreCase(heroeBorrar)).findFirst().orElse(null);
+
+        // Si no lo ha encontrado salta el error
+        if (heroeBorrado == null) {
+            JOptionPane.showMessageDialog(this, "ERROR. No existe el héroe " + heroeBorrar, "ERROR HÉROE", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Pregunta de confirmación, si acepta lo borra definitivamente
+        int decision = JOptionPane.showConfirmDialog(this, "¿Seguro que deseas borrar el héroe " + heroeBorrado.getNombre() + "?",
+                "¿Seguro?", JOptionPane.YES_NO_OPTION);
+        if (decision == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, "Héroe eliminado con éxito", "Eliminado", JOptionPane.INFORMATION_MESSAGE);
+            LogicaHeroes.getListaHeroes().remove(heroeBorrado);
+            cargarDatosTabla();
+        } else {
+            JOptionPane.showMessageDialog(this, "Héroe no eliminado", "No eliminado", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }

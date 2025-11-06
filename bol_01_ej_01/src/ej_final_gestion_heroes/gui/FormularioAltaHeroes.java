@@ -4,9 +4,12 @@
  */
 package ej_final_gestion_heroes.gui;
 
+import ej_final_gestion_heroes.dto.Heroe;
+import ej_final_gestion_heroes.logica.LogicaHeroes;
 import java.awt.Image;
 import java.util.Locale;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import org.netbeans.validation.api.builtin.stringvalidation.StringValidators;
 import org.netbeans.validation.api.ui.ValidationGroup;
@@ -49,7 +52,7 @@ public class FormularioAltaHeroes extends javax.swing.JDialog {
         jLabelFotoPoder = new javax.swing.JLabel();
         jButtonAddHeroeDialog = new javax.swing.JButton();
         jLabelNombrePoder1 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        jSpinnerNivel = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,39 +90,37 @@ public class FormularioAltaHeroes extends javax.swing.JDialog {
 
         jLabelNombrePoder1.setText(org.openide.util.NbBundle.getMessage(FormularioAltaHeroes.class, "FormularioAltaHeroes.jLabelNombrePoder1.text")); // NOI18N
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jSpinnerNivel.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabelNombre)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextFieldNombre))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabelNombre2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jDateChooserFechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabelNombrePoder)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jComboBoxPoder, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabelNombrePoder1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jSpinnerNivel)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabelNombre)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabelNombre2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooserFechaAlta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabelNombrePoder)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxPoder, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabelNombrePoder1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabelFotoPoder, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonAddHeroeDialog)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +136,7 @@ public class FormularioAltaHeroes extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombrePoder1)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinnerNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelNombre2)
@@ -147,7 +148,7 @@ public class FormularioAltaHeroes extends javax.swing.JDialog {
                         .addGap(40, 40, 40))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelFotoPoder, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelFotoPoder, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
 
@@ -178,31 +179,44 @@ public class FormularioAltaHeroes extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNombreActionPerformed
 
+    /**
+     * Añade al héroe a la lista de héroes
+     *
+     * @param evt
+     */
     private void jButtonAddHeroeDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddHeroeDialogActionPerformed
-        // TODO add your handling code here:
+        Heroe heroe = new Heroe(jTextFieldNombre.getText(), jComboBoxPoder.getSelectedItem().toString(),
+                Integer.parseInt((jSpinnerNivel.getValue().toString())), jDateChooserFechaAlta.getDate());
+        if (LogicaHeroes.existeHeroe(heroe)) {
+            JOptionPane.showMessageDialog(this, "ERROR. Ya existe un héroe con este nombre", "ERROR HÉROE", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        LogicaHeroes.addHeroe(heroe);
+        JOptionPane.showMessageDialog(this, "Añadido nuevo héroe con éxito", "Héroe añadido", JOptionPane.INFORMATION_MESSAGE);
+        dispose();
     }//GEN-LAST:event_jButtonAddHeroeDialogActionPerformed
 
     private void jComboBoxPoderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPoderActionPerformed
         String seleccion = (String) jComboBoxPoder.getSelectedItem();
         ImageIcon imagenOriginal;
-        
+
         switch (seleccion.toLowerCase()) {
             case "volar":
-                 imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/imgs/volar.jpg"));
+                imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/imgs/volar.jpg"));
                 break;
             case "ser invisible":
-                 imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/imgs/invisible.jpg"));
-                 break;
+                imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/imgs/invisible.jpg"));
+                break;
             case "super fuerza":
-                 imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/imgs/fuerza.png"));
-                 break;
+                imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/imgs/fuerza.png"));
+                break;
             case "inmortal":
-                 imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/imgs/inmortal.jpg"));
-                 break;
+                imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/imgs/inmortal.jpg"));
+                break;
             default:
                 throw new AssertionError();
         }
-     
+
         // Ajustar escala
         Image img = imagenOriginal.getImage();
         Image scaledImg = img.getScaledInstance(jLabelFotoPoder.getWidth(), jLabelFotoPoder.getHeight(), java.awt.Image.SCALE_SMOOTH);
@@ -258,7 +272,7 @@ public class FormularioAltaHeroes extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelNombrePoder;
     private javax.swing.JLabel jLabelNombrePoder1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinnerNivel;
     private javax.swing.JTextField jTextFieldNombre;
     private org.netbeans.validation.api.ui.swing.ValidationPanel validationPanel;
     // End of variables declaration//GEN-END:variables
@@ -266,11 +280,18 @@ public class FormularioAltaHeroes extends javax.swing.JDialog {
      * Valida los datos del formulario
      */
     private void validaciones() {
+        jButtonAddHeroeDialog.setEnabled(false);
         ValidationGroup group = validationPanel.getValidationGroup();
 
         group.add(jTextFieldNombre, StringValidators.REQUIRE_NON_EMPTY_STRING); // Que no deje vacío el string
         group.add(jTextFieldNombre, StringValidators.HOST_NAME); // Que sea un nombre
 
+        // Fecha de alta: truco para validar
+        javax.swing.JTextField dateTextField = (javax.swing.JTextField) jDateChooserFechaAlta.getDateEditor().getUiComponent();
+        dateTextField.setName("Fecha de alta");
+        group.add(dateTextField, StringValidators.REQUIRE_NON_EMPTY_STRING);
+
+        // Activa o desactiva el botón en función de si hay o no problemas
         validationPanel.addChangeListener((ChangeEvent e) -> {
             if (validationPanel.getProblem() == null) {
                 jButtonAddHeroeDialog.setEnabled(true);
