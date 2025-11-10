@@ -12,10 +12,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -36,6 +40,7 @@ public class GestorHeroes extends javax.swing.JFrame {
     public GestorHeroes() {
         Locale.setDefault(new Locale("es", "ES"));
         initComponents();
+        mostrarLookAndFeel();
         cambiarIconoApp();
         mostrarFechayUnix();
         iniciarComponentesTabla();
@@ -58,6 +63,9 @@ public class GestorHeroes extends javax.swing.JFrame {
         jPanelBotones = new javax.swing.JPanel();
         jButtonAddHeroe = new javax.swing.JButton();
         jButtonDeleteHeroe = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jComboLookAndFeel = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,6 +117,20 @@ public class GestorHeroes extends javax.swing.JFrame {
         });
         jPanelBotones.add(jButtonDeleteHeroe);
 
+        jPanel1.setLayout(new java.awt.GridLayout());
+
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText(org.openide.util.NbBundle.getMessage(GestorHeroes.class, "GestorHeroes.jLabel1.text")); // NOI18N
+        jPanel1.add(jLabel1);
+
+        jComboLookAndFeel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboLookAndFeel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboLookAndFeelActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboLookAndFeel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,6 +142,10 @@ public class GestorHeroes extends javax.swing.JFrame {
                     .addComponent(jPanelFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(43, 43, 43))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,10 +153,12 @@ public class GestorHeroes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addGap(2, 2, 2)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -145,6 +173,22 @@ public class GestorHeroes extends javax.swing.JFrame {
     private void jButtonDeleteHeroeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteHeroeActionPerformed
         eliminarHeroe();
     }//GEN-LAST:event_jButtonDeleteHeroeActionPerformed
+
+    private void jComboLookAndFeelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboLookAndFeelActionPerformed
+        try {
+            // Guarda el índice seleccionado
+            UIManager.LookAndFeelInfo lookAndFeel = UIManager.getInstalledLookAndFeels()[jComboLookAndFeel.getSelectedIndex()];
+
+            //  Con UIManager tenía un array con los Look And Feel instalados, entonces si accedo a la posición que 
+            // me devuelve la línea anterior, obtendré el Look And Feel correspondiente 
+            UIManager.setLookAndFeel(lookAndFeel.getClassName());
+
+            // Refrescamos para que se apliquen los cambios, es decir, actualizamos todo el árbol de componentes del JFrame
+            SwingUtilities.updateComponentTreeUI(this);
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
+            System.err.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jComboLookAndFeelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,8 +218,11 @@ public class GestorHeroes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddHeroe;
     private javax.swing.JButton jButtonDeleteHeroe;
+    private javax.swing.JComboBox<String> jComboLookAndFeel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelFecha;
     private javax.swing.JLabel jLabelUnix;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelBotones;
     private javax.swing.JPanel jPanelFecha;
     private javax.swing.JScrollPane jScrollPane1;
@@ -289,5 +336,18 @@ public class GestorHeroes extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Héroe no eliminado", "No eliminado", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+
+    /**
+     * Muestra la info de los temas de la GUI
+     */
+    private void mostrarLookAndFeel() {
+        DefaultComboBoxModel dcm = new DefaultComboBoxModel();
+
+        for (UIManager.LookAndFeelInfo lfi : UIManager.getInstalledLookAndFeels()) {
+            dcm.addElement(lfi.getName());
+        }
+
+        jComboLookAndFeel.setModel(dcm);
     }
 }
