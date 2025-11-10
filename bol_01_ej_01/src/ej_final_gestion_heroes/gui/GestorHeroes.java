@@ -64,7 +64,7 @@ public class GestorHeroes extends javax.swing.JFrame {
         jButtonAddHeroe = new javax.swing.JButton();
         jButtonDeleteHeroe = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelTema = new javax.swing.JLabel();
         jComboLookAndFeel = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -119,9 +119,9 @@ public class GestorHeroes extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridLayout());
 
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText(org.openide.util.NbBundle.getMessage(GestorHeroes.class, "GestorHeroes.jLabel1.text")); // NOI18N
-        jPanel1.add(jLabel1);
+        jLabelTema.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelTema.setText(org.openide.util.NbBundle.getMessage(GestorHeroes.class, "GestorHeroes.jLabelTema.text")); // NOI18N
+        jPanel1.add(jLabelTema);
 
         jComboLookAndFeel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboLookAndFeel.addActionListener(new java.awt.event.ActionListener() {
@@ -219,8 +219,8 @@ public class GestorHeroes extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAddHeroe;
     private javax.swing.JButton jButtonDeleteHeroe;
     private javax.swing.JComboBox<String> jComboLookAndFeel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelFecha;
+    private javax.swing.JLabel jLabelTema;
     private javax.swing.JLabel jLabelUnix;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelBotones;
