@@ -270,7 +270,9 @@ public class GestorHeroes extends javax.swing.JFrame {
         }
         // Busca al héroe en la lista
         Heroe heroeBorrado = LogicaHeroes.getListaHeroes().stream()
-                .filter(h -> h.getNombre().equalsIgnoreCase(heroeBorrar)).findFirst().orElse(null);
+                .filter(h -> h.getNombre()
+                .equalsIgnoreCase(heroeBorrar))
+                .findFirst().orElse(null);
 
         // Si no lo ha encontrado salta el error
         if (heroeBorrado == null) {
