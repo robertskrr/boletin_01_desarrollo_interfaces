@@ -167,7 +167,7 @@ public class GestorHeroes extends javax.swing.JFrame {
     private void jButtonAddHeroeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddHeroeActionPerformed
         FormularioAltaHeroes dialogHeroes = new FormularioAltaHeroes(this, true);
         dialogHeroes.setVisible(true);
-        cargarDatosTabla();
+        refrescarDatosTabla();
     }//GEN-LAST:event_jButtonAddHeroeActionPerformed
 
     private void jButtonDeleteHeroeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteHeroeActionPerformed
@@ -277,10 +277,10 @@ public class GestorHeroes extends javax.swing.JFrame {
         sorter.setSortKeys(sortKeys);
 
         // 3. Cargamos los datos iniciales
-        cargarDatosTabla();
+        refrescarDatosTabla();
     }
 
-    private void cargarDatosTabla() {
+    private void refrescarDatosTabla() {
         // 1. Borrar todas las filas del modelo existente (dtm)
         dtm.setRowCount(0);
 
@@ -332,7 +332,7 @@ public class GestorHeroes extends javax.swing.JFrame {
         if (decision == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, "Héroe eliminado con éxito", "Eliminado", JOptionPane.INFORMATION_MESSAGE);
             LogicaHeroes.getListaHeroes().remove(heroeBorrado);
-            cargarDatosTabla();
+            refrescarDatosTabla();
         } else {
             JOptionPane.showMessageDialog(this, "Héroe no eliminado", "No eliminado", JOptionPane.INFORMATION_MESSAGE);
         }
