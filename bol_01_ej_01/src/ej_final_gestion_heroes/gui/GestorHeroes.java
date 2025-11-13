@@ -248,7 +248,7 @@ public class GestorHeroes extends javax.swing.JFrame {
      */
     private void cambiarIconoApp() {
         // Carga la imagen
-        ImageIcon iconoApp = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/imgs/icono.png"));
+        ImageIcon iconoApp = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/gui/imgs/icono.png"));
 
         // Asigna el objeto Image
         Image iconoImagen = iconoApp.getImage();

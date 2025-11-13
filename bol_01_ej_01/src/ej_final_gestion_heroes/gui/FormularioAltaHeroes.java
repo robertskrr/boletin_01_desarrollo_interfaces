@@ -24,6 +24,8 @@ public class FormularioAltaHeroes extends javax.swing.JDialog {
 
     /**
      * Creates new form JDialogAddHeroes
+     * @param parent
+     * @param modal
      */
     public FormularioAltaHeroes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -202,16 +204,16 @@ public class FormularioAltaHeroes extends javax.swing.JDialog {
 
         switch (seleccion.toLowerCase()) {
             case "volar":
-                imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/imgs/volar.jpg"));
+                imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/gui/imgs/volar.jpg"));
                 break;
             case "ser invisible":
-                imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/imgs/invisible.jpg"));
+                imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/gui/imgs/invisible.jpg"));
                 break;
             case "super fuerza":
-                imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/imgs/fuerza.png"));
+                imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/gui/imgs/fuerza.png"));
                 break;
             case "inmortal":
-                imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/imgs/inmortal.jpg"));
+                imagenOriginal = new ImageIcon(getClass().getResource("/ej_final_gestion_heroes/gui/imgs/inmortal.jpg"));
                 break;
             default:
                 throw new AssertionError();
